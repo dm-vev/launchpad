@@ -39,6 +39,7 @@ int launchpad_vtty_init(void);
 int launchpad_vtty_deinit(void);
 
 int launchpad_vtty_register_driver(const struct vtty_driver *drv);
+int launchpad_vtty_register_uart(int uart_num, int tx_pin, int rx_pin, int baud);
 int launchpad_vtty_set_default(int id);
 struct launchpad_vtty_info launchpad_vtty_get_current(void);
 const struct launchpad_vtty_info *launchpad_vtty_list(int *cnt);

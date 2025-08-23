@@ -132,9 +132,9 @@ int launchpad_vtty_init(void)
     g_driver_count = 0;
     g_current_index = -1;
     g_event_cb = NULL;
-    /* Register built-in stdio driver */
     launchpad_vtty_register_driver(&stdio_driver);
-    launchpad_vtty_set_default(stdio_driver.id);
+    launchpad_vtty_register_uart(1, 38, 48, 115200);
+    launchpad_vtty_set_default(1);
     return 0;
 }
 

@@ -12,6 +12,7 @@ void launchpad_init(void)
     _register_symbol("launchpad_vtty_init", (void *)launchpad_vtty_init);
     _register_symbol("launchpad_vtty_deinit", (void *)launchpad_vtty_deinit);
     _register_symbol("launchpad_vtty_register_driver", (void *)launchpad_vtty_register_driver);
+    _register_symbol("launchpad_vtty_register_uart", (void *)launchpad_vtty_register_uart);
     _register_symbol("launchpad_vtty_set_default", (void *)launchpad_vtty_set_default);
     _register_symbol("launchpad_vtty_get_current", (void *)launchpad_vtty_get_current);
     _register_symbol("launchpad_vtty_list", (void *)launchpad_vtty_list);
