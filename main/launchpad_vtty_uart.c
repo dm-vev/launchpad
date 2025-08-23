@@ -58,7 +58,7 @@ static int uart_puts(const char *s)
     return (int)strlen(s);
 }
 
-static void uart_flush(void)
+static void vtty_uart_flush(void)
 {
     uart_wait_tx_done(g_uart.port, portMAX_DELAY);
 }
@@ -95,7 +95,7 @@ static const struct vtty_driver uart_driver = {
     .deinit = uart_deinit,
     .putc = uart_putc,
     .puts = uart_puts,
-    .flush = uart_flush,
+    .flush = vtty_uart_flush,
     .getc = uart_getc,
     .available = uart_available,
     .clear_screen = NULL,
