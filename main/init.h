@@ -1,0 +1,1 @@
+void launchpad_init(void);
