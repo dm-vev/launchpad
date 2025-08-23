@@ -4,6 +4,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>   /* size_t */
+#include <stdint.h>   /* uint8_t */
 
 /**
  * @brief Запускает ELF из памяти.

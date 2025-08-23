@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "elf/elf_symbol.h"
+#include "elf/esp_elf.h"
 #include "platform.h"
 
 void launchpad_init(void)
