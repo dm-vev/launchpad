@@ -29,5 +29,11 @@ void launchpad_init(void)
     _register_symbol("launchpad_vtty_set_callback", (void *)launchpad_vtty_set_callback);
     _register_symbol("launchpad_vtty_ioctl", (void *)launchpad_vtty_ioctl);
 
+    /* Standard stdio names mapped to vTTY for loaded ELF modules */
+    _register_symbol("puts", (void *)launchpad_vtty_puts);
+    _register_symbol("printf", (void *)launchpad_vtty_printf);
+    _register_symbol("putchar", (void *)launchpad_vtty_putchar);
+    _register_symbol("getchar", (void *)launchpad_vtty_getc);
+
     _register_symbol("launchpad_platform", (void *)launchpad_platform);
 }
