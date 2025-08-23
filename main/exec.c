@@ -9,6 +9,7 @@
 #include <stdint.h>
 
 #include "elf/esp_elf.h"
+#include "esp_err.h"
 #include "esp_log.h"
 
 static const char *TAG = "launchpad";

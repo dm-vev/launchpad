@@ -150,7 +150,7 @@ struct dyn_esp_elfsym {
 static struct dyn_esp_elfsym *g_dyn_syms = NULL;
 
 /* Внутренняя реализация – добавление узла в список   */
-static uintptr_t _register_symbol(const char *name, void *sym)
+uintptr_t _register_symbol(const char *name, void *sym)
 {
     if (!name || !sym) {
         return 0;
