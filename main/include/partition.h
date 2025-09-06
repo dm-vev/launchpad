@@ -15,7 +15,7 @@
 #include <stdbool.h>
 
 #include "esp_partition.h"
-#include "esp_spi_flash.h"          /* for spi_flash_mmap_handle_t */
+#include "spi_flash_mmap.h"          /* for spi_flash_mmap_handle_t */
 #include "esp_flash_encrypt.h"
 
 #ifdef __cplusplus
