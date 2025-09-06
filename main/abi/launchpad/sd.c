@@ -14,6 +14,9 @@
 
 #define TAG "LaunchPadSD"
 
+/* Forward declaration (not exposed in public headers) */
+extern esp_err_t sdmmc_send_app_cmd(sdmmc_card_t* card, sdmmc_command_t* cmd);
+
 static sdmmc_card_t *s_card = NULL;
 static bool s_mounted = false;
 static spi_host_device_t s_host = SPI2_HOST; // default host
@@ -154,11 +157,33 @@ size_t launchpad_sd_get_free_space_bytes(void)
 
 /* Низкоуровневый доступ: отправка произвольной команды SD */
 esp_err_t launchpad_sd_send_cmd(uint8_t cmd, uint32_t arg,
-                                sdmmc_response_t resp_type,
+                                int resp_type,
                                 uint32_t *resp)
 {
-    if (!s_mounted) return ESP_ERR_INVALID_STATE;
+    if (!s_mounted) {
+        return ESP_ERR_INVALID_STATE;
+    }
 
-    /* Используем helper из sdmmc_cmd.h */
-    return sdmmc_app_command(s_host, s_card, cmd, arg, resp_type, resp);
+    sdmmc_command_t command = {
+        .opcode = cmd,
+        .arg = arg,
+        .flags = SCF_CMD_AC | resp_type,
+    };
+
+    esp_err_t err = sdmmc_send_app_cmd(s_card, &command);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "sdmmc_send_app_cmd failed: %s", esp_err_to_name(err));
+        return err;
+    }
+
+    if (resp) {
+        resp[0] = command.response[0];
+        if (resp_type & SCF_RSP_136) {
+            resp[1] = command.response[1];
+            resp[2] = command.response[2];
+            resp[3] = command.response[3];
+        }
+    }
+
+    return ESP_OK;
 }

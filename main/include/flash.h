@@ -14,7 +14,8 @@
 #include <stdint.h>
 
 /* Pull in the official ESP‑IDF definitions for SPI flash types/functions. */
-#include "esp_spi_flash.h"
+#include "esp_flash.h"
+#include "spi_flash_mmap.h"
 
 #ifdef __cplusplus
 extern "C" {

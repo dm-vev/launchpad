@@ -43,7 +43,7 @@ size_t launchpad_sd_get_free_space_bytes(void);
 
 /* Низкоуровневый доступ (команды) */
 esp_err_t launchpad_sd_send_cmd(uint8_t cmd, uint32_t arg,
-                                sdmmc_response_t resp_type,
+                                int resp_type,
                                 uint32_t *resp);
 
 #endif /* LAUNCHPAD_SD_H_ */
