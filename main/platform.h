@@ -13,6 +13,7 @@
 
 /* Magic‑число – «проверка целостности» */
 #define LAUNCHPAD_MAGIC          0x4C415046U   /* 'LAPF' */
+#define HAS_FEATURE(info, feat)   (((info).features & (feat)) != 0)
 
 /* Ориентация памяти */
 enum {

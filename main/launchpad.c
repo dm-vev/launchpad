@@ -4,6 +4,8 @@
 #include "esp_littlefs.h"
 #include "exec.h"
 #include "init.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h" 
 
 #define PRINT_FEATURE(mask, name) \
     do { if (g_features & (mask)) printf("  [+] %s\n", name); } while (0)
@@ -37,5 +39,7 @@ void app_main(void)
     } 
 
     printf("LaunchPad halted");
-    for (;;);
+    for (;;) {
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
 }

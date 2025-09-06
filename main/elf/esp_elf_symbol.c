@@ -19,6 +19,25 @@
 #include <stdarg.h>
 
 #include "rom/ets_sys.h"
+/* FreeRTOS */
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+/* ESP-IDF system & log */
+#include "esp_system.h"
+#include "esp_log.h"
+#include "esp_random.h"
+
+/* VFS / файловые операции */
+#include "esp_vfs.h"
+
+/* Math (если нужны sin/cos/sqrt/fabs и т.п.) */
+#include <math.h>
+
+/* Sys/stat + fcntl (для open/fstat/lseek) */
+#include <sys/stat.h>
+#include <fcntl.h>
+#include "elf/esp_elf.h"
 
 #include "elf_symbol.h"
 
@@ -135,6 +154,55 @@ static const struct esp_elfsym g_esp_espidf_elfsyms[] = {
     /* ROM functions */
 
     ESP_ELFSYM_EXPORT(ets_printf),
+    ESP_ELFSYM_EXPORT(xTaskCreate),
+    ESP_ELFSYM_EXPORT(xTaskCreatePinnedToCore),
+    ESP_ELFSYM_EXPORT(vTaskDelete),
+    ESP_ELFSYM_EXPORT(vTaskDelay),
+    ESP_ELFSYM_EXPORT(xTaskDelayUntil),
+    ESP_ELFSYM_EXPORT(xTaskGetCurrentTaskHandle),
+    ESP_ELFSYM_EXPORT(uxTaskPriorityGet),
+    ESP_ELFSYM_EXPORT(vTaskPrioritySet),
+
+    /* esp_log.h */
+    ESP_ELFSYM_EXPORT(esp_log_level_set),
+    ESP_ELFSYM_EXPORT(esp_log),
+    ESP_ELFSYM_EXPORT(esp_log_timestamp),
+    ESP_ELFSYM_EXPORT(esp_log_write),
+    ESP_ELFSYM_EXPORT(esp_log_buffer_hex_internal),
+    ESP_ELFSYM_EXPORT(esp_log_buffer_char_internal),
+    ESP_ELFSYM_EXPORT(esp_log_buffer_hexdump_internal),
+
+    ESP_ELFSYM_EXPORT(esp_elf_request),
+    ESP_ELFSYM_EXPORT(esp_elf_init),
+    ESP_ELFSYM_EXPORT(esp_elf_deinit),
+    ESP_ELFSYM_EXPORT(esp_elf_relocate),
+
+    /* esp_system.h */
+    ESP_ELFSYM_EXPORT(esp_restart),
+    ESP_ELFSYM_EXPORT(esp_get_free_heap_size),
+    ESP_ELFSYM_EXPORT(esp_random),
+
+    /* VFS / файловые */
+    ESP_ELFSYM_EXPORT(open),
+    ESP_ELFSYM_EXPORT(read),
+    ESP_ELFSYM_EXPORT(write),
+    ESP_ELFSYM_EXPORT(close),
+    ESP_ELFSYM_EXPORT(lseek),
+    ESP_ELFSYM_EXPORT(fstat),
+
+    /* ctype.h */
+    ESP_ELFSYM_EXPORT(isalpha),
+    ESP_ELFSYM_EXPORT(isdigit),
+    ESP_ELFSYM_EXPORT(isspace),
+    ESP_ELFSYM_EXPORT(isalnum),
+    ESP_ELFSYM_EXPORT(isxdigit),
+
+    /* math.h (часто нужны) */
+    ESP_ELFSYM_EXPORT(sin),
+    ESP_ELFSYM_EXPORT(cos),
+    ESP_ELFSYM_EXPORT(tan),
+    ESP_ELFSYM_EXPORT(sqrt),
+    ESP_ELFSYM_EXPORT(fabs),
 
     ESP_ELFSYM_END
 };
