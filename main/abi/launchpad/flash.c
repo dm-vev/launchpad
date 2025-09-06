@@ -9,7 +9,7 @@
 #include "include/flash.h"
 
 #include <esp_log.h>
-#include <bootloader_support/include/esp_flash_encrypt.h> /* esp_flash_encryption_enabled() */
+#include "esp_flash_encrypt.h" /* esp_flash_encryption_enabled() */
 #include "esp_spi_flash.h"
 
 /* ------------------------------------------------------------------

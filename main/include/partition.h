@@ -16,7 +16,7 @@
 
 #include "esp_partition.h"
 #include "esp_spi_flash.h"          /* for spi_flash_mmap_handle_t */
-#include "bootloader_support/include/esp_flash_encrypt.h"
+#include "esp_flash_encrypt.h"
 
 /* ------------------------------------------------------------------
  *  Mapping memory type – re‑export the enum from esp_spi_flash.h
