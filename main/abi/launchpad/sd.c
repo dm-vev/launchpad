@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <stdint.h>
 #include <driver/gpio.h>
 #include <driver/spi_common.h>
 #include <esp_vfs_fat.h>
@@ -105,7 +106,7 @@ esp_err_t launchpad_sd_unmount(const char *mount_path)
         return ESP_ERR_INVALID_ARG;
     }
 
-    esp_err_t err = esp_vfs_fat_sdmmc_unmount(mount_path, s_card);
+    esp_err_t err = esp_vfs_fat_sdcard_unmount(mount_path, s_card);
     if (err == ESP_OK) {
         s_mounted  = false;
         s_card     = NULL;
@@ -153,8 +154,8 @@ size_t launchpad_sd_get_free_space_bytes(void)
 
 /* Низкоуровневый доступ: отправка произвольной команды SD */
 esp_err_t launchpad_sd_send_cmd(uint8_t cmd, uint32_t arg,
-                                sdmmc_response_type_t resp_type,
-                                sdmmc_response_t *resp)
+                                sdmmc_response_t resp_type,
+                                uint32_t *resp)
 {
     if (!s_mounted) return ESP_ERR_INVALID_STATE;
 

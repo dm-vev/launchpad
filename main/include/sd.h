@@ -3,9 +3,10 @@
 #define LAUNCHPAD_SD_H_
 
 #include <stdbool.h>
+#include <stdint.h>
 #include "esp_err.h"
 #include "driver/gpio.h"      /* gpio_num_t, GPIO_NUM_* */
-#include "sdmmc_cmd.h"        /* sdmmc_card_t, sdmmc_response_type_t, SDMMC_FREQ_* */
+#include "sdmmc_cmd.h"        /* sdmmc_card_t, SDMMC_FREQ_* */
 
 typedef struct {
     const char *mount_path;
@@ -42,7 +43,7 @@ size_t launchpad_sd_get_free_space_bytes(void);
 
 /* Низкоуровневый доступ (команды) */
 esp_err_t launchpad_sd_send_cmd(uint8_t cmd, uint32_t arg,
-                                sdmmc_response_type_t resp_type,
-                                sdmmc_response_t *resp);
+                                sdmmc_response_t resp_type,
+                                uint32_t *resp);
 
 #endif /* LAUNCHPAD_SD_H_ */

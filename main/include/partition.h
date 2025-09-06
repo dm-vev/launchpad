@@ -18,14 +18,6 @@
 #include "esp_spi_flash.h"          /* for spi_flash_mmap_handle_t */
 #include "esp_flash_encrypt.h"
 
-/* ------------------------------------------------------------------
- *  Mapping memory type – re‑export the enum from esp_spi_flash.h
- * ------------------------------------------------------------------ */
-typedef enum {
-    SPI_FLASH_MMAP_DATA = 0,
-    SPI_FLASH_MMAP_INST = 1
-} spi_flash_mmap_memory_t;
-
 #ifdef __cplusplus
 extern "C" {
 #endif
