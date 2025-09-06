@@ -8,6 +8,7 @@
 #include "include/flash.h"
 #include "include/sd.h"
 #include "include/partition.h"
+#include "include/rootfs.h"
 
 void launchpad_init(void)
 {
@@ -46,6 +47,7 @@ void launchpad_init(void)
     _register_symbol("launchpad_flash_mmap",            (void*)launchpad_flash_mmap);
     _register_symbol("launchpad_flash_munmap",          (void*)launchpad_flash_munmap);
     _register_symbol("launchpad_flash_is_encrypted",    (void*)launchpad_flash_is_encrypted);
+    _register_symbol("launchpad_mount_rootfs",    (void*)launchpad_mount_rootfs);
 
     _register_symbol("launchpad_partition_find",          (void*)launchpad_partition_find);
     _register_symbol("launchpad_partition_read",          (void*)launchpad_partition_read);
