@@ -83,6 +83,7 @@ int launchpad_set_permission(const char *path, mode_t mode)
     }
 
 
+/* Use VFS-specific chmod when available; otherwise fall back to ENOSYS */
 # ifdef CONFIG_VFS_SUPPORT
     /* В VFS API есть esp_vfs_chmod(). Если оно доступно – используем. */
 #  if defined(ESP_IDF_VERSION) && ESP_IDF_VERSION >= 50000   /* 5.x и выше */
@@ -104,5 +105,4 @@ int launchpad_set_permission(const char *path, mode_t mode)
     errno = ENOSYS;
     return -1;
 # endif
-#endif
 }

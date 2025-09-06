@@ -11,18 +11,10 @@
 
 #include <stddef.h>
 #include <stdbool.h>
+#include <stdint.h>
 
-/* Forward declaration for the opaque handle returned by mmap */
-typedef uint32_t spi_flash_mmap_handle_t;
-
-/* The enum is defined by ESP-IDF – we just re‑export it here so callers
- * don't need to include esp_spi_flash.h directly.  If you prefer, simply
- * #include <esp_spi_flash.h> instead of this typedef.
- */
-typedef enum {
-    SPI_FLASH_MMAP_DATA = 0,
-    SPI_FLASH_MMAP_INST = 1
-} spi_flash_mmap_memory_t;
+/* Pull in the official ESP‑IDF definitions for SPI flash types/functions. */
+#include "esp_spi_flash.h"
 
 #ifdef __cplusplus
 extern "C" {
