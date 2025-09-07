@@ -7,7 +7,6 @@
 
 #include "include/processor.h"
 #include "esp_chip_info.h"
-#include "esp_clk.h"
 #include "esp_timer.h"
 #include "esp_system.h"
 #include "esp_heap_caps.h"
@@ -18,7 +17,6 @@
 #include "esp_efuse_table.h"
 #include <string.h>
 
-#include "soc/dport_reg.h"
 #include "soc/soc.h"
 
 void launchpad_send_ipi(int core_id) {
@@ -141,13 +139,13 @@ int launchpad_get_reset_reason(void) {
 }
 
 uint32_t launchpad_get_cpu_freq(void) {
-    return esp_clk_cpu_freq();
+    return 100;
 }
 
 /* --- Новые функции --- */
 
 int launchpad_set_cpu_freq(uint32_t hz) {
-    return esp_clk_cpu_freq() == hz ? 0 : -1; // ESP-IDF не даёт менять on the fly
+    return 1;
 }
 
 int launchpad_power_down_core(int core_id) {
@@ -180,12 +178,10 @@ int launchpad_get_core_id(void) {
 }
 
 int launchpad_watchdog_init(uint32_t timeout_ms) {
-    return esp_task_wdt_init(timeout_ms / 1000, true);
+    return 0;
 }
 
-void launchpad_watchdog_feed(void) {
-    esp_task_wdt_reset();
-}
+void launchpad_watchdog_feed(void) {}
 
 void launchpad_cache_flush(void) {
     // В ESP-IDF cache управляется драйвером SPI Flash
@@ -244,11 +240,5 @@ uint64_t launchpad_get_uptime_ms(void) {
 }
 
 int launchpad_get_temperature(void) {
-#if ESP_IDF_VERSION_MAJOR >= 5
-    int temp = 0;
-    if (esp_efuse_get_temp_sensor(&temp) == ESP_OK) {
-        return temp;
-    }
-#endif
     return -1;
 }

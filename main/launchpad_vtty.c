@@ -288,4 +288,3 @@ int launchpad_vtty_ioctl(int cmd, void *arg)
         return -1;
     return drv->ioctl(cmd, arg);
 }
-

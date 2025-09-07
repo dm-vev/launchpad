@@ -114,4 +114,3 @@ int launchpad_vtty_register_uart(int uart_num, int tx_pin, int rx_pin, int baud)
     g_uart.baud = baud;
     return launchpad_vtty_register_driver(&uart_driver);
 }
-

@@ -6,6 +6,8 @@
 #include "init.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h" 
+#include "esp_task_wdt.h"
+#include "launchpad_vtty.h"
 
 #define PRINT_FEATURE(mask, name) \
     do { if (g_features & (mask)) printf("  [+] %s\n", name); } while (0)
@@ -16,6 +18,7 @@
 void app_main(void)
 {
     printf("\x1B[1m\x1B[33mStarting LaunchPad...\n");
+    esp_task_wdt_deinit();
 
     // Mount LittleFS on /bootfs
     esp_vfs_littlefs_conf_t bootfs_conf = {
@@ -32,6 +35,7 @@ void app_main(void)
     }
 
     launchpad_init();
+    launchpad_vtty_printf("Hello world");
 
     const char *elf_path = "/boot/app.elf";
     if (!exec_from_file(elf_path, 0, NULL)) {

@@ -46,6 +46,14 @@ extern unsigned int __fixunsdfsi(double a);
 extern int __gtdf2(double a, double b);
 extern double __floatunsidf(unsigned int i);
 extern double __divdf3(double a, double b);
+unsigned long long __udivdi3(unsigned long long a, unsigned long long b) {
+    return b ? a / b : 0ULL;
+}
+
+unsigned long long __umoddi3(unsigned long long a, unsigned long long b) {
+    return b ? a % b : 0ULL;
+}
+
 
 /** @brief Libc public functions symbols look-up table */
 
@@ -110,6 +118,8 @@ static const struct esp_elfsym g_esp_libc_elfsyms[] = {
     ESP_ELFSYM_EXPORT(__gtdf2),
     ESP_ELFSYM_EXPORT(__floatunsidf),
     ESP_ELFSYM_EXPORT(__divdf3),
+    ESP_ELFSYM_EXPORT(__umoddi3),
+    ESP_ELFSYM_EXPORT(__udivdi3),
 
     /* getopt.h */
 
