@@ -35,7 +35,6 @@ void app_main(void)
     }
 
     launchpad_init();
-    launchpad_vtty_printf("Hello world");
 
     const char *elf_path = "/boot/app.elf";
     if (!exec_from_file(elf_path, 0, NULL)) {

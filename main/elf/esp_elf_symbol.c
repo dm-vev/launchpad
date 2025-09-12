@@ -19,6 +19,7 @@
 #include <stdarg.h>
 
 #include "rom/ets_sys.h"
+#include "rom/cache.h"
 /* FreeRTOS */
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -72,6 +73,11 @@ static const struct esp_elfsym g_esp_libc_elfsyms[] = {
     ESP_ELFSYM_EXPORT(strtol),
     ESP_ELFSYM_EXPORT(strcspn),
     ESP_ELFSYM_EXPORT(strncat),
+    ESP_ELFSYM_EXPORT(strncpy),
+    ESP_ELFSYM_EXPORT(strncmp),
+    ESP_ELFSYM_EXPORT(snprintf),
+    ESP_ELFSYM_EXPORT(strdup),
+    ESP_ELFSYM_EXPORT(esp_random),
 
     /* unistd.h */
 
@@ -120,6 +126,9 @@ static const struct esp_elfsym g_esp_libc_elfsyms[] = {
     ESP_ELFSYM_EXPORT(__divdf3),
     ESP_ELFSYM_EXPORT(__umoddi3),
     ESP_ELFSYM_EXPORT(__udivdi3),
+    ESP_ELFSYM_EXPORT(__assert_func),
+    ESP_ELFSYM_EXPORT(esp_err_to_name),
+    ESP_ELFSYM_EXPORT(esp_log_buffer_hexdump_internal),
 
     /* getopt.h */
 
@@ -166,6 +175,10 @@ static const struct esp_elfsym g_esp_espidf_elfsyms[] = {
     ESP_ELFSYM_EXPORT(ets_printf),
     ESP_ELFSYM_EXPORT(xTaskCreate),
     ESP_ELFSYM_EXPORT(xTaskCreatePinnedToCore),
+    ESP_ELFSYM_EXPORT(xQueueSemaphoreTake),
+    ESP_ELFSYM_EXPORT(xQueueGenericSend),
+    ESP_ELFSYM_EXPORT(xQueueCreateMutex),
+    
     ESP_ELFSYM_EXPORT(vTaskDelete),
     ESP_ELFSYM_EXPORT(vTaskDelay),
     ESP_ELFSYM_EXPORT(xTaskDelayUntil),
@@ -199,6 +212,11 @@ static const struct esp_elfsym g_esp_espidf_elfsyms[] = {
     ESP_ELFSYM_EXPORT(close),
     ESP_ELFSYM_EXPORT(lseek),
     ESP_ELFSYM_EXPORT(fstat),
+
+    // Directory I/O
+    ESP_ELFSYM_EXPORT(opendir),
+    ESP_ELFSYM_EXPORT(readdir),
+    ESP_ELFSYM_EXPORT(closedir),
 
     /* ctype.h */
     ESP_ELFSYM_EXPORT(isalpha),

@@ -6,3 +6,4 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(launchpad)
 
 littlefs_create_partition_image(boot boot FLASH_IN_PROJECT)
+littlefs_create_partition_image(root root FLASH_IN_PROJECT)
