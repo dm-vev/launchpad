@@ -195,7 +195,7 @@ int launchpad_vtty_puts(const char *s)
 
 int launchpad_vtty_printf(const char *fmt, ...)
 {
-    char buffer[256];
+    char buffer[1024];
     va_list ap;
     va_start(ap, fmt);
     int len = vsnprintf(buffer, sizeof(buffer), fmt, ap);
